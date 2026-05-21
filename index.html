@@ -422,6 +422,7 @@ nav{
 .tag-mob{background:#e0f7f0;color:#1a7a5a;border:1px solid #b0e8d8}
 .tag-pc{background:#ede8fe;color:#5c3fbf;border:1px solid #c9befc}
 .tag-ai{background:#fef9d0;color:#7a6800;border:1px solid #ede090}
+.tag-vfx{background:#fde8e8;color:#8a1a1a;border:1px solid #f0b0b0}
 
 .track-desc-row{
   font-size:13px;
@@ -449,7 +450,7 @@ nav{
 }
 
 .track-expand-item::before{
-  content:'—';
+  content:'--';
   color:var(--hint);
   flex-shrink:0;
   margin-top:0;
@@ -745,9 +746,9 @@ footer{
       <div class="skills-row">
         <span class="s-pill">Motion design</span>
         <span class="s-pill">Video editing</span>
-        <span class="s-pill">Graphic design</span>
-        <span class="s-pill">Creative storytelling</span>
-        <span class="s-pill">AI literacy</span>
+        <span class="s-pill">VFX</span>
+        <span class="s-pill">AI content creation</span>
+        <span class="s-pill">Mobile workflows</span>
       </div>
     </div>
   </div>
@@ -756,7 +757,7 @@ footer{
     <div class="preview-block" onclick="go('learn')">
       <div class="preview-label">02 &mdash; Learning</div>
       <div class="preview-title">5 TRACKS.<br>MOBILE & PC.</div>
-      <div class="preview-sub">Motion design, video editing, AI content creation and more. Pick your track and build from there.</div>
+      <div class="preview-sub">Motion design, video editing, VFX, AI content creation and more. Pick your track and build from there.</div>
       <div class="preview-arrow">&rarr;</div>
     </div>
     <div class="preview-block" onclick="go('events')">
@@ -774,38 +775,39 @@ footer{
     <div class="learn-header">
       <div class="hero-kicker"><span></span>02 &mdash; Learning tracks</div>
       <h1>FIVE TRACKS.<br>ONE COMMUNITY.</h1>
-      <p>Every track covers both mobile and PC workflows. Tap a track to expand it.</p>
+      <p>Every track is built for real-world output. Tap a track to expand it.</p>
     </div>
   </div>
 
+  <!-- TRACK 01: Motion Design - PC -->
   <div class="track-row" onclick="toggle(this)">
     <div class="track-num">01</div>
     <div class="track-main">
       <div class="track-name-row">
-        <div class="track-title">Motion design</div>
+        <div class="track-title">Motion Design &ndash; PC</div>
         <div class="track-tags-inline">
-          <span class="tag tag-mob">Mobile</span>
           <span class="tag tag-pc">PC</span>
         </div>
       </div>
-      <div class="track-desc-row">Bring your ideas to life through animation and moving visuals.</div>
+      <div class="track-desc-row">Professional motion graphics from concept to export. After Effects, built for production.</div>
       <div class="track-expand">
-        <div class="track-expand-item">Keyframing and timing fundamentals</div>
-        <div class="track-expand-item">After Effects workflow (PC)</div>
-        <div class="track-expand-item">CapCut animation tools (Mobile)</div>
-        <div class="track-expand-item">Looping and seamless transitions</div>
+        <div class="track-expand-item">After Effects interface and project setup</div>
+        <div class="track-expand-item">Keyframing, easing, and timing control</div>
+        <div class="track-expand-item">Shape layers and vector animation</div>
         <div class="track-expand-item">Text animation and kinetic type</div>
-        <div class="track-expand-item">Exporting for social and web</div>
+        <div class="track-expand-item">Looping and seamless transitions</div>
+        <div class="track-expand-item">Exporting for social, web, and client delivery</div>
       </div>
     </div>
     <div class="track-toggle">+</div>
   </div>
 
+  <!-- TRACK 02: Video Editing -->
   <div class="track-row" onclick="toggle(this)">
     <div class="track-num">02</div>
     <div class="track-main">
       <div class="track-name-row">
-        <div class="track-title">Video editing</div>
+        <div class="track-title">Video Editing</div>
         <div class="track-tags-inline">
           <span class="tag tag-mob">Mobile</span>
           <span class="tag tag-pc">PC</span>
@@ -814,7 +816,7 @@ footer{
       <div class="track-desc-row">Edit faster, tell better stories, and develop a signature style.</div>
       <div class="track-expand">
         <div class="track-expand-item">Editing workflow and timeline organisation</div>
-        <div class="track-expand-item">Premiere Pro and DaVinci (PC)</div>
+        <div class="track-expand-item">Premiere Pro and DaVinci Resolve (PC)</div>
         <div class="track-expand-item">CapCut advanced editing (Mobile)</div>
         <div class="track-expand-item">Colour grading basics</div>
         <div class="track-expand-item">Audio mixing and sync</div>
@@ -824,11 +826,35 @@ footer{
     <div class="track-toggle">+</div>
   </div>
 
+  <!-- TRACK 03: Motion Design - Phone -->
   <div class="track-row" onclick="toggle(this)">
     <div class="track-num">03</div>
     <div class="track-main">
       <div class="track-name-row">
-        <div class="track-title">AI content creation</div>
+        <div class="track-title">Motion Design &ndash; Phone</div>
+        <div class="track-tags-inline">
+          <span class="tag tag-mob">Mobile</span>
+        </div>
+      </div>
+      <div class="track-desc-row">Full motion output from your phone. No desktop required.</div>
+      <div class="track-expand">
+        <div class="track-expand-item">CapCut animation tools and keyframe control</div>
+        <div class="track-expand-item">Mobile-first motion workflow</div>
+        <div class="track-expand-item">Text and overlay animation for social</div>
+        <div class="track-expand-item">Transitions that hold up on any screen</div>
+        <div class="track-expand-item">Speed and efficiency on a small device</div>
+        <div class="track-expand-item">Exporting optimised for Instagram, TikTok, YouTube</div>
+      </div>
+    </div>
+    <div class="track-toggle">+</div>
+  </div>
+
+  <!-- TRACK 04: AI Content Creation -->
+  <div class="track-row" onclick="toggle(this)">
+    <div class="track-num">04</div>
+    <div class="track-main">
+      <div class="track-name-row">
+        <div class="track-title">AI Content Creation</div>
         <div class="track-tags-inline">
           <span class="tag tag-ai">AI</span>
           <span class="tag tag-mob">Mobile</span>
@@ -848,47 +874,25 @@ footer{
     <div class="track-toggle">+</div>
   </div>
 
-  <div class="track-row" onclick="toggle(this)">
-    <div class="track-num">04</div>
-    <div class="track-main">
-      <div class="track-name-row">
-        <div class="track-title">Graphic design</div>
-        <div class="track-tags-inline">
-          <span class="tag tag-mob">Mobile</span>
-          <span class="tag tag-pc">PC</span>
-        </div>
-      </div>
-      <div class="track-desc-row">Visual communication, layout, and brand identity foundations.</div>
-      <div class="track-expand">
-        <div class="track-expand-item">Typography and visual hierarchy</div>
-        <div class="track-expand-item">Figma workflow (PC)</div>
-        <div class="track-expand-item">Canva and mobile design tools</div>
-        <div class="track-expand-item">Brand identity and logo basics</div>
-        <div class="track-expand-item">Designing for social formats</div>
-        <div class="track-expand-item">Colour theory for creatives</div>
-      </div>
-    </div>
-    <div class="track-toggle">+</div>
-  </div>
-
+  <!-- TRACK 05: VFX - PC -->
   <div class="track-row" onclick="toggle(this)">
     <div class="track-num">05</div>
     <div class="track-main">
       <div class="track-name-row">
-        <div class="track-title">Creative storytelling</div>
+        <div class="track-title">VFX &ndash; PC</div>
         <div class="track-tags-inline">
-          <span class="tag tag-mob">Mobile</span>
           <span class="tag tag-pc">PC</span>
+          <span class="tag tag-vfx">VFX</span>
         </div>
       </div>
-      <div class="track-desc-row">Structure narratives that resonate and keep audiences watching.</div>
+      <div class="track-desc-row">Compositing, tracking, and visual effects for commercial and creative work.</div>
       <div class="track-expand">
-        <div class="track-expand-item">Story structure for short-form content</div>
-        <div class="track-expand-item">Hook writing and audience retention</div>
-        <div class="track-expand-item">Visual narrative techniques</div>
-        <div class="track-expand-item">Building a recognisable creative voice</div>
-        <div class="track-expand-item">Storytelling for brands and clients</div>
-        <div class="track-expand-item">Script and storyboard basics</div>
+        <div class="track-expand-item">After Effects compositing fundamentals</div>
+        <div class="track-expand-item">Motion tracking and camera lock</div>
+        <div class="track-expand-item">Green screen and chroma key techniques</div>
+        <div class="track-expand-item">Particle systems and simulations</div>
+        <div class="track-expand-item">Light wraps, glows, and realism passes</div>
+        <div class="track-expand-item">Finishing and rendering for delivery</div>
       </div>
     </div>
     <div class="track-toggle">+</div>
@@ -944,7 +948,7 @@ footer{
         <span class="event-pill pill-live">Live session</span>
         <span class="event-pill pill-live">Confirmed</span>
       </div>
-      <div class="event-note">Full breakdown of all five learning tracks. What to learn, in what order, and how to do it on mobile and PC.</div>
+      <div class="event-note">Full breakdown of all five learning tracks. What to learn, in what order, and how to get results on mobile and PC.</div>
     </div>
     <div class="event-aud">
       <div class="aud-label">Audience</div>
