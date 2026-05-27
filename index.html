@@ -1,1045 +1,1630 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Incubation Hub</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bricolage+Grotesque:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-
-:root{
-  --ink:#0f0e0c;
-  --paper:#f6f2ea;
-  --mid:#e8e2d6;
-  --faint:#d8d1c4;
-  --muted:#9a9184;
-  --hint:#c4bdb2;
-  --acid:#d6ff3c;
-  --acid-dark:#a8c900;
-}
-
-html{font-size:16px;scroll-behavior:smooth}
-
-body{
-  background:var(--paper);
-  color:var(--ink);
-  font-family:'Bricolage Grotesque',sans-serif;
-  font-weight:400;
-  line-height:1.6;
-  min-height:100vh;
-}
-
-a{color:inherit;text-decoration:none;cursor:pointer}
-
-/* NAV */
-nav{
-  border-bottom:1.5px solid var(--ink);
-  padding:0 40px;
-  height:52px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:var(--paper);
-}
-
-.logo{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:20px;
-  letter-spacing:0.06em;
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.logo-dot{
-  width:8px;height:8px;
-  background:var(--acid);
-  border-radius:50%;
-  border:1.5px solid var(--ink);
-}
-
-.nav-links{
-  display:flex;
-  gap:0;
-  list-style:none;
-}
-
-.nav-links a{
-  font-size:12px;
-  font-weight:500;
-  letter-spacing:0.06em;
-  text-transform:uppercase;
-  padding:6px 16px;
-  border:1.5px solid transparent;
-  border-radius:2px;
-  color:var(--muted);
-  transition:all 0.12s;
-}
-
-.nav-links a:hover{color:var(--ink)}
-
-.nav-links a.active{
-  color:var(--ink);
-  background:var(--acid);
-  border-color:var(--ink);
-}
-
-/* PAGE SYSTEM */
-.page{display:none}
-.page.active{display:block}
-
-/* SHARED */
-.wrap{max-width:1000px;margin:0 auto;padding:0 40px}
-
-.rule{height:1.5px;background:var(--ink);margin:0}
-
-.section-num{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:11px;
-  letter-spacing:0.14em;
-  color:var(--muted);
-}
-
-/* ===================== HOME ===================== */
-.hero{
-  padding:64px 0 0;
-  border-bottom:1.5px solid var(--ink);
-}
-
-.hero-inner{
-  display:grid;
-  grid-template-columns:1fr 280px;
-  gap:0;
-  align-items:end;
-}
-
-.hero-text{padding-bottom:48px}
-
-.hero-kicker{
-  font-size:11px;
-  font-weight:500;
-  letter-spacing:0.14em;
-  text-transform:uppercase;
-  color:var(--muted);
-  margin-bottom:24px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.hero-kicker span{
-  display:inline-block;
-  width:28px;
-  height:1.5px;
-  background:var(--muted);
-}
-
-.hero h1{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(72px,11vw,130px);
-  line-height:0.92;
-  letter-spacing:0.01em;
-  margin-bottom:28px;
-  color:var(--ink);
-}
-
-.hero h1 .line-accent{
-  color:var(--paper);
-  -webkit-text-stroke:2px var(--ink);
-}
-
-.hero-sub{
-  font-size:16px;
-  font-weight:300;
-  color:var(--muted);
-  max-width:440px;
-  line-height:1.75;
-  margin-bottom:32px;
-}
-
-.btn-primary{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  font-family:'Bricolage Grotesque',sans-serif;
-  font-size:12px;
-  font-weight:600;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  padding:12px 22px;
-  background:var(--acid);
-  color:var(--ink);
-  border:1.5px solid var(--ink);
-  border-radius:2px;
-  cursor:pointer;
-  transition:all 0.12s;
-}
-
-.btn-primary:hover{background:var(--ink);color:var(--acid)}
-
-.btn-ghost{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  font-family:'Bricolage Grotesque',sans-serif;
-  font-size:12px;
-  font-weight:500;
-  letter-spacing:0.06em;
-  text-transform:uppercase;
-  padding:12px 22px;
-  background:transparent;
-  color:var(--muted);
-  border:1.5px solid var(--faint);
-  border-radius:2px;
-  cursor:pointer;
-  transition:all 0.12s;
-}
-
-.btn-ghost:hover{border-color:var(--ink);color:var(--ink)}
-
-.btn-row{display:flex;gap:10px;flex-wrap:wrap}
-
-.hero-aside{
-  border-left:1.5px solid var(--ink);
-  padding:32px 24px;
-  align-self:stretch;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  gap:32px;
-}
-
-.stat-block{}
-
-.stat-n{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:52px;
-  line-height:1;
-  color:var(--ink);
-}
-
-.stat-l{
-  font-size:12px;
-  letter-spacing:0.06em;
-  text-transform:uppercase;
-  color:var(--muted);
-  margin-top:2px;
-}
-
-.hero-tag{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-  padding:6px 12px;
-  background:var(--acid);
-  border:1.5px solid var(--ink);
-  border-radius:2px;
-}
-
-/* ABOUT STRIP */
-.about-strip{
-  display:grid;
-  grid-template-columns:200px 1fr;
-  gap:0;
-  border-bottom:1.5px solid var(--ink);
-}
-
-.about-label{
-  border-right:1.5px solid var(--ink);
-  padding:40px 32px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-}
-
-.about-label-title{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:13px;
-  letter-spacing:0.1em;
-  color:var(--muted);
-}
-
-.about-content{
-  padding:40px 40px;
-  font-size:16px;
-  font-weight:300;
-  color:var(--muted);
-  line-height:1.8;
-}
-
-.about-content strong{color:var(--ink);font-weight:500}
-
-.skills-row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:24px;
-}
-
-.s-pill{
-  font-size:11px;
-  font-weight:500;
-  letter-spacing:0.06em;
-  text-transform:uppercase;
-  padding:5px 12px;
-  border:1.5px solid var(--faint);
-  border-radius:2px;
-  color:var(--muted);
-}
-
-/* PREVIEW STRIP */
-.preview-strip{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  border-bottom:1.5px solid var(--ink);
-}
-
-.preview-block{
-  padding:36px 40px;
-  cursor:pointer;
-  transition:background 0.12s;
-}
-
-.preview-block:first-child{border-right:1.5px solid var(--ink)}
-
-.preview-block:hover{background:var(--mid)}
-
-.preview-label{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:11px;
-  letter-spacing:0.1em;
-  color:var(--muted);
-  margin-bottom:10px;
-}
-
-.preview-title{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:32px;
-  letter-spacing:0.02em;
-  color:var(--ink);
-  margin-bottom:8px;
-}
-
-.preview-sub{
-  font-size:13px;
-  font-weight:300;
-  color:var(--muted);
-  line-height:1.6;
-}
-
-.preview-arrow{
-  display:inline-block;
-  margin-top:16px;
-  font-size:20px;
-  color:var(--hint);
-}
-
-/* ===================== LEARN ===================== */
-
-.learn-header{
-  padding:56px 0 40px;
-  border-bottom:1.5px solid var(--ink);
-}
-
-.learn-header h1{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(48px,8vw,88px);
-  line-height:0.95;
-  letter-spacing:0.01em;
-}
-
-.learn-header p{
-  font-size:15px;
-  font-weight:300;
-  color:var(--muted);
-  max-width:460px;
-  margin-top:16px;
-}
-
-/* TRACK ROWS */
-.track-row{
-  border-bottom:1.5px solid var(--ink);
-  display:grid;
-  grid-template-columns:60px 1fr auto;
-  gap:0;
-  align-items:stretch;
-  cursor:pointer;
-  transition:background 0.12s;
-}
-
-.track-row:hover{background:var(--mid)}
-
-.track-row.open{background:var(--mid)}
-
-.track-num{
-  border-right:1.5px solid var(--ink);
-  display:flex;
-  align-items:flex-start;
-  justify-content:center;
-  padding-top:24px;
-  font-family:'Bebas Neue',sans-serif;
-  font-size:13px;
-  letter-spacing:0.08em;
-  color:var(--hint);
-}
-
-.track-main{padding:24px 32px}
-
-.track-name-row{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  margin-bottom:0;
-}
-
-.track-title{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:28px;
-  letter-spacing:0.02em;
-  color:var(--ink);
-}
-
-.track-tags-inline{display:flex;gap:6px}
-
-.tag{
-  font-size:10px;
-  font-weight:600;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  padding:3px 8px;
-  border-radius:2px;
-}
-
-.tag-mob{background:#e0f7f0;color:#1a7a5a;border:1px solid #b0e8d8}
-.tag-pc{background:#ede8fe;color:#5c3fbf;border:1px solid #c9befc}
-.tag-ai{background:#fef9d0;color:#7a6800;border:1px solid #ede090}
-.tag-vfx{background:#fde8e8;color:#8a1a1a;border:1px solid #f0b0b0}
-
-.track-desc-row{
-  font-size:13px;
-  font-weight:300;
-  color:var(--muted);
-  margin-top:6px;
-}
-
-.track-expand{
-  display:none;
-  margin-top:20px;
-  padding-top:20px;
-  border-top:1px dashed var(--hint);
-}
-
-.track-row.open .track-expand{display:grid;grid-template-columns:1fr 1fr;gap:6px 24px}
-
-.track-expand-item{
-  font-size:13px;
-  color:var(--muted);
-  padding:4px 0;
-  display:flex;
-  gap:10px;
-  align-items:flex-start;
-}
-
-.track-expand-item::before{
-  content:'--';
-  color:var(--hint);
-  flex-shrink:0;
-  margin-top:0;
-}
-
-.track-toggle{
-  border-left:1.5px solid var(--ink);
-  padding:24px 20px;
-  display:flex;
-  align-items:flex-start;
-  justify-content:center;
-  font-size:20px;
-  color:var(--muted);
-  transition:transform 0.2s;
-  min-width:56px;
-  padding-top:26px;
-}
-
-.track-row.open .track-toggle{transform:rotate(45deg)}
-
-/* ===================== EVENTS ===================== */
-
-.events-header{
-  padding:56px 0 40px;
-  border-bottom:1.5px solid var(--ink);
-}
-
-.events-header h1{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(48px,8vw,88px);
-  line-height:0.95;
-}
-
-.events-header p{
-  font-size:15px;
-  font-weight:300;
-  color:var(--muted);
-  max-width:440px;
-  margin-top:16px;
-}
-
-.events-section-label{
-  padding:20px 0 0;
-  border-bottom:1.5px solid var(--ink);
-}
-
-.events-section-label-inner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding-bottom:14px;
-}
-
-.events-section-title{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:13px;
-  letter-spacing:0.1em;
-  color:var(--muted);
-}
-
-.event-row{
-  border-bottom:1.5px solid var(--ink);
-  display:grid;
-  grid-template-columns:88px 1fr 140px;
-  gap:0;
-  align-items:stretch;
-  opacity:1;
-  transition:background 0.12s;
-}
-
-.event-row:hover{background:var(--mid)}
-.event-row.tbd{opacity:0.5}
-
-.event-date{
-  border-right:1.5px solid var(--ink);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  padding:20px 12px;
-}
-
-.event-day-n{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:36px;
-  line-height:1;
-  color:var(--ink);
-}
-
-.event-month-l{
-  font-size:10px;
-  font-weight:600;
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-  color:var(--muted);
-  margin-top:2px;
-}
-
-.event-body{padding:20px 28px}
-
-.event-title{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:22px;
-  letter-spacing:0.02em;
-  color:var(--ink);
-  margin-bottom:4px;
-}
-
-.event-info{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  flex-wrap:wrap;
-  margin-bottom:8px;
-}
-
-.event-pill{
-  font-size:10px;
-  font-weight:600;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  padding:3px 9px;
-  border-radius:2px;
-}
-
-.pill-live{background:var(--acid);border:1px solid var(--acid-dark);color:var(--ink)}
-.pill-tbc{background:var(--mid);border:1px solid var(--faint);color:var(--muted)}
-
-.event-note{
-  font-size:13px;
-  font-weight:300;
-  color:var(--muted);
-  line-height:1.6;
-}
-
-.event-aud{
-  border-left:1.5px solid var(--ink);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:16px;
-  gap:4px;
-}
-
-.aud-label{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--hint)}
-.aud-val{font-size:12px;font-weight:500;color:var(--muted);line-height:1.4}
-
-/* RECURRING */
-.recurring-rows{border-bottom:1.5px solid var(--ink)}
-
-.rec-row{
-  border-bottom:1px dashed var(--faint);
-  display:grid;
-  grid-template-columns:200px 1fr 120px;
-  gap:0;
-  padding:18px 0;
-  align-items:center;
-}
-
-.rec-row:last-child{border-bottom:none}
-
-.rec-name{
-  font-size:14px;
-  font-weight:500;
-  color:var(--ink);
-}
-
-.rec-desc{
-  font-size:13px;
-  font-weight:300;
-  color:var(--muted);
-  padding-right:24px;
-}
-
-.rec-freq{
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:0.06em;
-  text-transform:uppercase;
-  color:var(--muted);
-  text-align:right;
-}
-
-/* FOOTER */
-footer{
-  border-top:1.5px solid var(--ink);
-  padding:24px 40px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.footer-logo{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:14px;
-  letter-spacing:0.08em;
-  color:var(--muted);
-}
-
-.footer-tag{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  font-size:11px;
-  font-weight:500;
-  letter-spacing:0.06em;
-  text-transform:uppercase;
-  color:var(--muted);
-}
-
-.footer-dot{
-  width:6px;height:6px;
-  border-radius:50%;
-  background:var(--acid);
-  border:1px solid var(--ink);
-}
-
-@media(max-width:640px){
-  nav{padding:0 16px}
-  .wrap{padding:0 16px}
-  .hero-inner{grid-template-columns:1fr}
-  .hero-aside{display:none}
-  .about-strip{grid-template-columns:1fr}
-  .about-label{border-right:none;border-bottom:1.5px solid var(--ink);padding:24px 16px}
-  .about-content{padding:24px 16px}
-  .preview-strip{grid-template-columns:1fr}
-  .preview-block:first-child{border-right:none;border-bottom:1.5px solid var(--ink)}
-  .track-row{grid-template-columns:40px 1fr auto}
-  .track-main{padding:18px 16px}
-  .event-row{grid-template-columns:72px 1fr}
-  .event-aud{display:none}
-  .rec-row{grid-template-columns:1fr auto;gap:4px 16px}
-  .rec-desc{display:none}
-  footer{padding:20px 16px}
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Know Your Path — The Incubation Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #22c55e;
+      --red-dark: #16a34a;
+      --white: #ffffff;
+      --black: #0e0e0e;
+      --off-black: #161616;
+      --grey: rgba(255,255,255,0.38);
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── AMBIENT GLOW ORBS ─── */
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::before {
+      width: 700px; height: 700px;
+      top: -200px; left: -200px;
+      background: radial-gradient(circle, rgba(34,197,94,0.06) 0%, transparent 70%);
+    }
+    body::after {
+      width: 600px; height: 600px;
+      bottom: 10%; right: -150px;
+      background: radial-gradient(circle, rgba(34,197,94,0.05) 0%, transparent 70%);
+    }
+
+    .glow-mid {
+      position: fixed;
+      width: 500px; height: 500px;
+      top: 30%; left: 50%;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(34,197,94,0.04) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── NAV ─── */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 40px;
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.05em;
+      color: var(--white);
+    }
+    .nav-logo span { color: var(--red); }
+    .nav-plus {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--red);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: 300;
+      color: #fff;
+      transition: background 0.2s;
+    }
+    .nav-plus:hover { background: var(--red-dark); }
+    /* ─── VIDEO BG ─── */
+    .video-bg-wrap {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+      background: #0e0e0e;
+    }
+    .video-bg-wrap video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      opacity: 0;
+      transition: opacity 0.7s ease;
+    }
+    .video-bg-wrap video.active {
+      opacity: 0.75;
+      filter: blur(18px);
+      transform: scale(1.08);
+    }
+    /* True linear ramp: 0% opacity at top, 100% black exactly at cards (~44%) */
+    .video-bg-fade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(14,14,14,0)    0%,
+        rgba(14,14,14,0.11) 5%,
+        rgba(14,14,14,0.22) 10%,
+        rgba(14,14,14,0.33) 16%,
+        rgba(14,14,14,0.44) 22%,
+        rgba(14,14,14,0.55) 28%,
+        rgba(14,14,14,0.66) 34%,
+        rgba(14,14,14,0.77) 39%,
+        rgba(14,14,14,0.88) 42%,
+        rgba(14,14,14,1)    45%,
+        rgba(14,14,14,1)    100%
+      );
+    }
+
+    /* Ensure everything above the video */
+    .nav, .hero, .paths-section { position: relative; z-index: 1; }
+
+    /* ─── HERO ─── */
+    .hero {
+      text-align: center;
+      padding: 60px 24px 72px;
+      position: relative;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.45);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 7px 18px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+    }
+    .eyebrow-dot {
+      width: 6px; height: 6px;
+      background: var(--red);
+      border-radius: 50%;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(232,50,26,0.5); }
+      50% { opacity: 0.7; box-shadow: 0 0 0 5px rgba(232,50,26,0); }
+    }
+
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(72px, 13vw, 180px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 0.01em;
+      margin-bottom: 28px;
+      white-space: nowrap;
+    }
+    .h1-top { display: inline; color: var(--white); }
+    .h1-bottom { display: inline; color: var(--red); }
+
+    .hero-sub {
+      font-size: clamp(13px, 1.5vw, 15px);
+      color: rgba(255,255,255,0.38);
+      max-width: 400px;
+      margin: 0 auto 48px;
+      line-height: 1.75;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-hint {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      color: rgba(255,255,255,0.2);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .hint-line { width: 40px; height: 1px; background: rgba(255,255,255,0.1); }
+
+    /* ─── PATHS SECTION ─── */
+    .paths-section {
+      padding: 0 0 120px;
+      max-width: none;
+      margin: 0;
+      width: 100vw;
+    }
+
+    .paths-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      padding: 0 8px;
+    }
+    @media (max-width: 980px)  { .paths-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 600px)  { .paths-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ─── CARD ─── */
+    .path-card {
+      position: relative;
+      aspect-ratio: 1 / 2;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      transition:
+        transform 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.8s ease,
+        opacity 0.7s ease;
+      will-change: transform, filter, opacity;
+    }
+    .path-card:hover { transform: translateY(-12px) scale(1.02); }
+
+    /* blur siblings when one is source */
+    .paths-grid.has-active .path-card:not(.is-source) {
+      filter: blur(4px) brightness(0.3);
+      opacity: 0.5;
+      transform: scale(0.96);
+      pointer-events: none;
+    }
+    .paths-grid.has-active .path-card.is-source {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    /* Media layer */
+    .card-media {
+      position: absolute;
+      inset: 0;
+      background: #050100;
+      transition: transform 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .path-card:hover .card-media { transform: scale(1.06); }
+
+    /* Frozen frame video inside card */
+    .card-freeze {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* vignette */
+    .card-vignette {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.97) 0%,
+        rgba(0,0,0,0.6) 42%,
+        rgba(0,0,0,0.15) 75%,
+        rgba(0,0,0,0.04) 100%
+      );
+      transition: background 0.8s ease;
+    }
+    .path-card:hover .card-vignette {
+      background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.99) 0%,
+        rgba(0,0,0,0.75) 48%,
+        rgba(0,0,0,0.3) 76%,
+        rgba(0,0,0,0.06) 100%
+      );
+    }
+
+    /* top red accent line */
+    .card-accent-glow {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--red);
+      transition: opacity 0.6s ease;
+      opacity: 0;
+    }
+    .path-card:hover .card-accent-glow { opacity: 1; }
+
+    /* Card text */
+    .card-body {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 22px 18px 24px;
+    }
+
+    .card-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(28px, 3vw, 36px);
+      font-weight: 400;
+      color: #fff;
+      letter-spacing: 0.02em;
+      line-height: 1.0;
+      margin-bottom: 0;
+    }
+
+    /* Hover-revealed stats */
+    .card-reveal {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(12px);
+      transition:
+        max-height 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.6s ease 0.1s,
+        transform 0.7s ease 0.1s;
+    }
+    .path-card:hover .card-reveal {
+      max-height: 200px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-sep {
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      margin: 14px 0;
+    }
+    .reveal-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 11px;
+    }
+    .reveal-label { color: rgba(255,255,255,0.32); font-weight: 500; letter-spacing: 0.04em; }
+    .reveal-val   { color: rgba(255,255,255,0.85); font-weight: 700; }
+    .reveal-val.red { color: var(--red); }
+
+    .reveal-cta {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 15px;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.4s;
+    }
+    .path-card:hover .reveal-cta { color: #fff; }
+    .reveal-cta svg {
+      width: 13px; height: 13px;
+      transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .path-card:hover .reveal-cta svg { transform: translateX(5px); }
+
+    .stars { font-size: 9px; letter-spacing: -0.5px; }
+    .sf { color: var(--red); }
+    .se { color: rgba(255,255,255,0.12); }
+
+    /* ─── BACKDROP ─── */
+    #backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      pointer-events: none;
+      background: rgba(0,0,0,0);
+      backdrop-filter: blur(0px) brightness(1);
+      -webkit-backdrop-filter: blur(0px) brightness(1);
+      transition:
+        background 0.6s ease,
+        backdrop-filter 0.6s ease,
+        -webkit-backdrop-filter 0.6s ease;
+    }
+    #backdrop.active {
+      background: rgba(0,0,0,0.54);
+      backdrop-filter: blur(12px) brightness(0.6);
+      -webkit-backdrop-filter: blur(12px) brightness(0.6);
+      pointer-events: auto;
+    }
+
+    /* ─── EXPANDING OVERLAY ─── */
+    #expandOverlay {
+      position: fixed;
+      z-index: 200;
+      display: none;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #1a1a1a;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,255,255,0.08);
+    }
+    #expandOverlay.animating {
+      transition:
+        top    0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        left   0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        width  0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        height 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        border-radius 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #expandOverlay.closing {
+      transition:
+        top    0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        left   0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        width  0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        border-radius 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .ov-media {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.6;
+    }
+
+    .ov-grad {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(14,14,14,0.82) 0%, rgba(14,14,14,0.55) 48%, rgba(14,14,14,0.15) 100%),
+        linear-gradient(to top, rgba(14,14,14,0.35) 0%, transparent 60%);
+    }
+
+    .ov-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .ov-content.visible { opacity: 1; pointer-events: auto; }
+
+    .ov-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 34px 40px 20px;
+      flex-shrink: 0;
+    }
+    .ov-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--red);
+      border: 1px solid rgba(232,50,26,0.3);
+      background: rgba(232,50,26,0.08);
+      padding: 4px 12px;
+      border-radius: 3px;
+      margin-bottom: 12px;
+    }
+    .ov-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(38px, 5vw, 64px);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: #fff;
+      line-height: 1.0;
+    }
+    .ov-subtitle {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      margin-top: 8px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+    .ov-close {
+      width: 40px; height: 40px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      color: rgba(255,255,255,0.5);
+      flex-shrink: 0;
+      transition: background 0.2s, color 0.2s, transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .ov-close:hover { background: var(--red); color: #fff; transform: rotate(90deg); }
+
+    .ov-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 40px 48px;
+      scroll-behavior: smooth;
+    }
+    .ov-body::-webkit-scrollbar { width: 3px; }
+    .ov-body::-webkit-scrollbar-track { background: transparent; }
+    .ov-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+
+    .ov-body > * {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.38s ease, transform 0.38s ease;
+    }
+    .ov-content.visible .ov-body > *:nth-child(1) { opacity:1; transform:none; transition-delay:.42s; }
+    .ov-content.visible .ov-body > *:nth-child(2) { opacity:1; transform:none; transition-delay:.50s; }
+    .ov-content.visible .ov-body > *:nth-child(3) { opacity:1; transform:none; transition-delay:.57s; }
+    .ov-content.visible .ov-body > *:nth-child(4) { opacity:1; transform:none; transition-delay:.63s; }
+    .ov-content.visible .ov-body > *:nth-child(5) { opacity:1; transform:none; transition-delay:.69s; }
+    .ov-content.visible .ov-body > *:nth-child(6) { opacity:1; transform:none; transition-delay:.75s; }
+    .ov-content.visible .ov-body > *:nth-child(7) { opacity:1; transform:none; transition-delay:.80s; }
+
+    /* ─── DETAIL CONTENT STYLES ─── */
+    .intro-block {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-left: 3px solid var(--red);
+      border-radius: 4px;
+      padding: 22px 24px;
+      margin-bottom: 24px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.48);
+    }
+    .intro-block strong { color: rgba(255,255,255,0.9); }
+
+    .glance-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .glance-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px;
+      padding: 14px 16px;
+    }
+    .glance-lbl {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 6px;
+    }
+    .glance-val {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.4;
+    }
+    .glance-val.acc { color: var(--red); }
+    .glance-val.gld { color: #fbbf24; }
+
+    .sec-head {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.25);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+    .sec-head::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.06); }
+
+    .timeline { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+    .tl-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px;
+      padding: 16px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .tl-item::before { content: ''; position: absolute; left:0; top:0; bottom:0; width:3px; }
+    .tl-item.b::before { background: #3b82f6; }
+    .tl-item.m::before { background: #f59e0b; }
+    .tl-item.e::before { background: var(--red); }
+    .tl-level { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing:.12em; margin-bottom:3px; }
+    .tl-item.b .tl-level { color: #3b82f6; }
+    .tl-item.m .tl-level { color: #f59e0b; }
+    .tl-item.e .tl-level { color: var(--red); }
+    .tl-dur { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing:.02em; color:#fff; margin-bottom:6px; }
+    .tl-desc { font-size: 12px; color: rgba(255,255,255,0.4); line-height:1.65; }
+    .tl-earn {
+      display: inline-block; margin-top:10px;
+      background: rgba(232,50,26,0.1);
+      border: 1px solid rgba(232,50,26,0.2);
+      color: var(--red);
+      font-size: 10.5px; font-weight:700;
+      padding: 3px 10px; border-radius:3px;
+    }
+
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .cl-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px;
+      padding: 16px 18px;
+    }
+    .cl-type { font-size: 12.5px; font-weight:700; color:rgba(255,255,255,0.85); margin-bottom:4px; }
+    .cl-range { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing:.02em; color: var(--red); margin-bottom:6px; }
+    .cl-detail { font-size: 11px; color:rgba(255,255,255,0.35); line-height:1.6; }
+
+    .cta-band {
+      background: rgba(232,50,26,0.06);
+      border: 1px solid rgba(232,50,26,0.15);
+      border-radius: 4px;
+      padding: 26px;
+      text-align: center;
+    }
+    .cta-band h3 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing:.05em; color:#fff; margin-bottom:8px; }
+    .cta-band p  { font-size: 13px; color:rgba(255,255,255,0.38); line-height:1.65; }
+
+    /* ─── SPRINGBOARD VIDEO GRID ─── */
+    .sb-wrap {
+      margin: 0 -40px 28px;
+      position: relative;
+    }
+    .sb-viewport {
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+      height: 260px;
+      position: relative;
+    }
+    .sb-viewport:active { cursor: grabbing; }
+    .sb-grid {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 0 40px;
+      will-change: transform;
+      transition: none;
+    }
+    .sb-item {
+      flex-shrink: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .sb-item:hover { transform: scale(1.05); box-shadow: 0 12px 40px rgba(0,0,0,0.6); }
+    .sb-item.active-item {
+      transform: scale(1.08);
+      box-shadow: 0 16px 50px rgba(232,50,26,0.3), 0 0 0 2px rgba(232,50,26,0.5);
+    }
+    .ratio-169 { width: 340px; height: 191px; }
+    .ratio-916 { width: 107px; height: 190px; }
+
+    .sb-media {
+      width: 100%; height: 100%;
+      background: #111;
+      position: relative;
+    }
+    .sb-media iframe,
+    .sb-media video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border: none;
+      pointer-events: none;
+    }
+    /* scale iframe content to fill without letterbox */
+    .sb-media iframe { transform: scale(1); }
+
+    .sb-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      transition: background 0.3s ease;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 10px;
+    }
+    .sb-item:hover .sb-overlay,
+    .sb-item.active-item .sb-overlay { background: rgba(0,0,0,0); }
+
+    .ig-placeholder {
+      width: 100%; height: 100%;
+      background: #1a1a1a;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 8px;
+    }
+    .ig-placeholder svg { width: 32px; height: 32px; }
+    .ig-placeholder span { font-size: 9px; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; text-transform: uppercase; }
+    .sb-ig .sb-overlay { background: rgba(0,0,0,0.2); }
+    .ig-link {
+      font-size: 10px; font-weight: 700; color: #fff;
+      text-decoration: none; letter-spacing: 0.06em;
+      background: rgba(232,50,26,0.8); padding: 4px 10px; border-radius: 4px;
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .sb-item:hover .ig-link { opacity: 1; }
+
+    .sb-hint {
+      text-align: center;
+      font-size: 10px;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 10px;
+    }
+
+    /* ─── STATS ROW ─── */
+    .ps-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 18px 24px;
+      margin-bottom: 20px;
+    }
+    .ps-stat { flex: 1; text-align: center; }
+    .ps-lbl { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.25); margin-bottom: 6px; }
+    .ps-val { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.85); }
+    .ps-val.red { color: var(--red); }
+    .ps-div { width: 1px; height: 32px; background: rgba(255,255,255,0.07); flex-shrink: 0; }
+
+    /* ─── WHAT IS IT ─── */
+    .pi-block {
+      font-size: 14px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 28px;
+      padding: 0 2px;
+    }
+    .pi-block strong { color: rgba(255,255,255,0.88); }
+
+    /* ─── TIMELINE ROW ─── */
+    .tl-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    /* ─── CLIENT PILLS ─── */
+    .cl-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .cl-pill {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 6px;
+      padding: 10px 14px;
+    }
+    .cl-name { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.8); }
+    .cl-range { font-size: 11px; color: var(--red); font-weight: 600; }
+
+    /* ─── INFOGRAPHIC LAYOUT ─── */
+    .info-section-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.3);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      margin-top: 0;
+      padding-top: 72px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .info-section-label:first-of-type {
+      padding-top: 0;
+      border-top: none;
+    }
+    .info-section-label i { color: var(--red); font-size: 10px; }
+
+    .info-hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: start;
+      margin-bottom: 28px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .info-hero-text p { font-size: 13.5px; line-height: 1.8; color: rgba(255,255,255,0.45); }
+    .info-hero-text p strong { color: rgba(255,255,255,0.88); }
+    .info-hero-text .info-section-label { margin-bottom: 10px; }
+    .info-hero-software {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+    .sw-badge {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.05em;
+    }
+    .sw-badge.dim { color: rgba(255,255,255,0.3); border-color: rgba(255,255,255,0.05); }
+
+    /* Glance row */
+    .glance-row {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .gl-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 8px;
+      padding: 14px 10px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .gl-icon { font-size: 18px; color: var(--red); }
+    .gl-lbl { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.28); }
+    .gl-val { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.82); line-height: 1.5; }
+    .gl-val.red-val { color: var(--red); font-size: 13px; font-weight: 800; }
+
+    /* Timeline — image cards with hover reveal */
+    .tl-infographic {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+    .tl-inf-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: default;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background: transparent;
+    }
+    .tl-inf-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transform-origin: top center;
+      transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .tl-inf-item:hover .tl-inf-img { transform: scale(0.92); }
+
+    /* Gradient — only appears on hover */
+    .tl-inf-vignette {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0) 75%);
+      mix-blend-mode: multiply;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .tl-inf-item:hover .tl-inf-vignette { opacity: 1; }
+
+    /* Always-visible base text */
+    .tl-inf-base {
+      position: relative;
+      z-index: 1;
+      padding: 16px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 3px;
+    }
+    .tl-inf-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 0.06em;
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    }
+    .tl-inf-dur {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 0.04em;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    }
+
+    /* Hover reveal details */
+    .tl-inf-reveal {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(14px);
+      transition:
+        max-height 0.65s cubic-bezier(0.16,1,0.3,1),
+        opacity    0.5s  cubic-bezier(0.16,1,0.3,1) 0.08s,
+        transform  0.55s cubic-bezier(0.16,1,0.3,1) 0.06s;
+    }
+    .tl-inf-item:hover .tl-inf-reveal {
+      max-height: 160px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .tl-inf-desc {
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      padding-top: 8px;
+    }
+
+    /* Glance — no boxes, just clean rows */
+    .glance-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px 40px;
+      margin-bottom: 36px;
+      padding: 4px 0;
+    }
+    .gl-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .gl-icon { font-size: 30px; color: var(--red); margin-bottom: 6px; }
+    .gl-lbl { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.28); }
+    .gl-val { font-size: 15px; font-weight: 700; color: rgba(255,255,255,0.88); line-height: 1.4; }
+    .gl-val.red-val { color: var(--red); font-size: 17px; font-weight: 800; }
+
+    /* Who Hires */
+    .who-hires {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .wh-row {
+      display: grid;
+      grid-template-columns: 40px 1fr auto auto;
+      gap: 14px;
+      align-items: center;
+      background: rgba(255,255,255,0.02);
+      padding: 13px 16px;
+      transition: background 0.2s;
+    }
+    .wh-row:hover { background: rgba(255,255,255,0.05); }
+    .wh-icon { color: var(--red); font-size: 16px; text-align: center; }
+    .wh-name { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.85); margin-bottom: 2px; }
+    .wh-desc { font-size: 10.5px; color: rgba(255,255,255,0.32); }
+    .wh-rate { font-size: 12px; font-weight: 800; color: var(--red); text-align: right; white-space: nowrap; line-height: 1.4; }
+    .wh-rate span { font-size: 9px; font-weight: 500; color: rgba(255,255,255,0.3); }
+    .wh-len { font-size: 10px; color: rgba(255,255,255,0.28); text-align: right; white-space: nowrap; line-height: 1.5; min-width: 100px; }
+
+    .coming-soon { text-align:center; padding:72px 24px; }    .cs-icon { font-size:48px; margin-bottom:20px; }
+    .coming-soon h3 { font-family: 'Bebas Neue', sans-serif; font-size:28px; letter-spacing:.05em; color:#fff; margin-bottom:12px; }
+    .coming-soon p { font-size:14px; color:rgba(255,255,255,0.38); max-width:320px; margin:0 auto; line-height:1.7; }
+
+    @media (max-width: 640px) {
+      .ov-header { padding: 24px 22px 16px; }
+      .ov-body   { padding: 0 22px 40px; }
+      .glance-grid { grid-template-columns: 1fr 1fr; }
+      .clients-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-<nav>
-  <div class="logo"><div class="logo-dot"></div>THE INCUBATION HUB</div>
-  <ul class="nav-links">
-    <li><a onclick="go('home')" id="nav-home" class="active">Home</a></li>
-    <li><a onclick="go('learn')" id="nav-learn">Learn</a></li>
-    <li><a onclick="go('events')" id="nav-events">Events</a></li>
-  </ul>
+<!-- AMBIENT GLOWS -->
+<div class="glow-mid"></div>
+
+<!-- ─── VIDEO BACKGROUND ─── -->
+<div class="video-bg-wrap">
+  <video class="bg-video" id="bgDefault" autoplay muted loop playsinline>
+    <source src="https://agadon.b-cdn.net/Agadon%20Preview%20Video%20Q25.5.mp4" type="video/mp4">
+  </video>
+  <video class="bg-video" id="bgMotionLaptop" muted loop playsinline>
+    <source src="https://agadon.b-cdn.net/T_Appkit%20R7.mp4" type="video/mp4">
+  </video>
+  <video class="bg-video" id="bgVideoEditing" muted loop playsinline>
+    <source src="https://agadon.b-cdn.net/GFH%20Wakala%20Feature%20Showcase%20(Final%20Render).mp4" type="video/mp4">
+  </video>
+  <video class="bg-video" id="bgMotionPhone" muted loop playsinline>
+    <source src="https://agadon.b-cdn.net/Godark%20Rv4%20Cc%20Q22.mp4" type="video/mp4">
+  </video>
+  <video class="bg-video" id="bgAiContent" muted loop playsinline>
+    <source src="https://agadon.b-cdn.net/Cloud_Vizor%20R2.mp4" type="video/mp4">
+  </video>
+  <video class="bg-video" id="bgVfx" muted loop playsinline>
+    <source src="https://agadon.b-cdn.net/Karl_1_R2.mp4" type="video/mp4">
+  </video>
+  <div class="video-bg-fade"></div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">THE INCUBATION HUB<span>.</span></div>
+  <div class="nav-plus">+</div>
 </nav>
 
-<!-- HOME -->
-<div id="page-home" class="page active">
-  <div class="wrap">
-    <div class="hero">
-      <div class="hero-inner">
-        <div class="hero-text">
-          <div class="hero-kicker"><span></span>The creative hub for movers</div>
-          <h1>LEARN.<br><span class="line-accent">GROW.</span><br>EARN.</h1>
-          <p class="hero-sub">A space for creatives who see what is coming and move before everyone else. The industry is shifting. Your advantage is timing.</p>
-          <div class="btn-row">
-            <button class="btn-primary" onclick="go('learn')">Start learning &rarr;</button>
-            <button class="btn-ghost" onclick="go('events')">View events</button>
-          </div>
-        </div>
-        <div class="hero-aside">
-          <div class="stat-block">
-            <div class="stat-n">1,971</div>
-            <div class="stat-l">Members</div>
-          </div>
-          <div class="stat-block">
-            <div class="stat-n">5</div>
-            <div class="stat-l">Learning tracks</div>
-          </div>
-          <div class="stat-block">
-            <div class="stat-n">Free</div>
-            <div class="stat-l">Always</div>
-          </div>
-          <div class="hero-tag">&#9679;&nbsp; Relaunch May 26</div>
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <h1>
+    <span class="h1-top">Know Your</span>
+    <span class="h1-bottom">Path</span>
+  </h1>
+  <div class="hero-hint">
+    <div class="hint-line"></div>
+    Hover to preview · Click to open
+    <div class="hint-line"></div>
+  </div>
+</section>
+
+<!-- ─── PATHS ─── -->
+<section class="paths-section">
+  <div class="paths-grid" id="pathsGrid">
+
+    <!-- MOTION DESIGN - LAPTOP -->
+    <div class="path-card" data-path="motion-laptop" data-video="bgMotionLaptop" onclick="openPathWithSB('motion-laptop',this)" onmouseenter="hoverVideo('bgMotionLaptop')" onmouseleave="resetVideo()">
+      <div class="card-media"><video class="card-freeze" muted playsinline preload="metadata"><source src="https://agadon.b-cdn.net/T_Appkit%20R7.mp4" type="video/mp4"></video></div>
+      <div class="card-vignette"></div>
+      <div class="card-accent-glow"></div>
+      <div class="card-body">
+        <div class="card-name">Motion<br>Design</div>
+        <div class="card-reveal">
+          <div class="reveal-sep"></div>
+          <div class="reveal-row"><span class="reveal-label">Income</span><span class="reveal-val red">$100–$5,000</span></div>
+          <div class="reveal-row"><span class="reveal-label">First job</span><span class="reveal-val">~4 months</span></div>
+          <div class="reveal-row"><span class="reveal-label">Technical</span><span class="stars"><span class="sf">★★★★★</span></span></div>
+          <div class="reveal-row"><span class="reveal-label">Demand</span><span class="stars"><span class="sf">★★★</span><span class="se">★★</span></span></div>
+          <div class="reveal-cta">Explore path <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="about-strip">
-    <div class="about-label">
-      <div class="about-label-title">About</div>
-      <div class="section-num">01 / 01</div>
-    </div>
-    <div class="about-content">
-      <p>The Incubation Hub exists for one reason: for like-minded creatives to <strong>move first and move fast.</strong></p>
-      <p>AI is reshaping how work gets made, how value gets priced, and who gets paid. The people who win are not necessarily the most talented. They are the ones who see what is coming and adapt first.</p>
-      <p>When there is a tool, a skill, a shift, or an opportunity worth knowing about, <strong>it comes here first.</strong> Members leave more skilled, more informed, and more equipped to earn from their craft than when they arrived.</p>
-      <div class="skills-row">
-        <span class="s-pill">Motion design</span>
-        <span class="s-pill">Video editing</span>
-        <span class="s-pill">VFX</span>
-        <span class="s-pill">AI content creation</span>
-        <span class="s-pill">Mobile workflows</span>
+    <!-- VIDEO EDITING -->
+    <div class="path-card" data-path="video-editing" data-video="bgVideoEditing" onclick="openPath('video-editing',this)" onmouseenter="hoverVideo('bgVideoEditing')" onmouseleave="resetVideo()">
+      <div class="card-media"><video class="card-freeze" muted playsinline preload="metadata"><source src="https://agadon.b-cdn.net/GFH%20Wakala%20Feature%20Showcase%20(Final%20Render).mp4" type="video/mp4"></video></div>
+      <div class="card-vignette"></div>
+      <div class="card-accent-glow"></div>
+      <div class="card-body">
+        <div class="card-name">Video<br>Editing</div>
+        <div class="card-reveal">
+          <div class="reveal-sep"></div>
+          <div class="reveal-row"><span class="reveal-label">Income</span><span class="reveal-val red">$100–$3,000</span></div>
+          <div class="reveal-row"><span class="reveal-label">First job</span><span class="reveal-val">~2 months</span></div>
+          <div class="reveal-row"><span class="reveal-label">Technical</span><span class="stars"><span class="sf">★★★</span><span class="se">★★</span></span></div>
+          <div class="reveal-row"><span class="reveal-label">Demand</span><span class="stars"><span class="sf">★★★★★</span></span></div>
+          <div class="reveal-cta">Explore path <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="preview-strip">
-    <div class="preview-block" onclick="go('learn')">
-      <div class="preview-label">02 &mdash; Learning</div>
-      <div class="preview-title">5 TRACKS.<br>MOBILE & PC.</div>
-      <div class="preview-sub">Motion design, video editing, VFX, AI content creation and more. Pick your track and build from there.</div>
-      <div class="preview-arrow">&rarr;</div>
+    <!-- MOTION DESIGN - PHONE -->
+    <div class="path-card" data-path="motion-phone" data-video="bgMotionPhone" onclick="openPath('motion-phone',this)" onmouseenter="hoverVideo('bgMotionPhone')" onmouseleave="resetVideo()">
+      <div class="card-media"><video class="card-freeze" muted playsinline preload="metadata"><source src="https://agadon.b-cdn.net/Godark%20Rv4%20Cc%20Q22.mp4" type="video/mp4"></video></div>
+      <div class="card-vignette"></div>
+      <div class="card-accent-glow"></div>
+      <div class="card-body">
+        <div class="card-name">Motion<br>Phone</div>
+        <div class="card-reveal">
+          <div class="reveal-sep"></div>
+          <div class="reveal-row"><span class="reveal-label">Income</span><span class="reveal-val red">$100–$2,000</span></div>
+          <div class="reveal-row"><span class="reveal-label">First job</span><span class="reveal-val">~3 months</span></div>
+          <div class="reveal-row"><span class="reveal-label">Technical</span><span class="stars"><span class="sf">★★★</span><span class="se">★★</span></span></div>
+          <div class="reveal-row"><span class="reveal-label">Demand</span><span class="stars"><span class="sf">★★</span><span class="se">★★★</span></span></div>
+          <div class="reveal-cta">Explore path <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </div>
     </div>
-    <div class="preview-block" onclick="go('events')">
-      <div class="preview-label">03 &mdash; Events</div>
-      <div class="preview-title">LIVE.<br>MONTHLY.</div>
-      <div class="preview-sub">Portfolio reviews, project file breakdowns, and guest sessions. The next session is May 26.</div>
-      <div class="preview-arrow">&rarr;</div>
+
+    <!-- AI CONTENT CREATION -->
+    <div class="path-card" data-path="ai-content" data-video="bgAiContent" onclick="openPath('ai-content',this)" onmouseenter="hoverVideo('bgAiContent')" onmouseleave="resetVideo()">
+      <div class="card-media"><video class="card-freeze" muted playsinline preload="metadata"><source src="https://agadon.b-cdn.net/Cloud_Vizor%20R2.mp4" type="video/mp4"></video></div>
+      <div class="card-vignette"></div>
+      <div class="card-accent-glow"></div>
+      <div class="card-body">
+        <div class="card-name">AI<br>Content</div>
+        <div class="card-reveal">
+          <div class="reveal-sep"></div>
+          <div class="reveal-row"><span class="reveal-label">Income</span><span class="reveal-val red">$50–$800</span></div>
+          <div class="reveal-row"><span class="reveal-label">First job</span><span class="reveal-val">~3 weeks</span></div>
+          <div class="reveal-row"><span class="reveal-label">Technical</span><span class="stars"><span class="sf">★</span><span class="se">★★★★</span></span></div>
+          <div class="reveal-row"><span class="reveal-label">Demand</span><span class="stars"><span class="sf">★★★★</span><span class="se">★</span></span></div>
+          <div class="reveal-cta">Explore path <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </div>
     </div>
+
+    <!-- VFX -->
+    <div class="path-card" data-path="vfx-pc" data-video="bgVfx" onclick="openPath('vfx-pc',this)" onmouseenter="hoverVideo('bgVfx')" onmouseleave="resetVideo()">
+      <div class="card-media"><video class="card-freeze" muted playsinline preload="metadata"><source src="https://agadon.b-cdn.net/Karl_1_R2.mp4" type="video/mp4"></video></div>
+      <div class="card-vignette"></div>
+      <div class="card-accent-glow"></div>
+      <div class="card-body">
+        <div class="card-name">VFX</div>
+        <div class="card-reveal">
+          <div class="reveal-sep"></div>
+          <div class="reveal-row"><span class="reveal-label">Income</span><span class="reveal-val red">$500–$10,000</span></div>
+          <div class="reveal-row"><span class="reveal-label">First job</span><span class="reveal-val">6–8 months</span></div>
+          <div class="reveal-row"><span class="reveal-label">Technical</span><span class="stars"><span class="sf">★★★★★</span></span></div>
+          <div class="reveal-row"><span class="reveal-label">Demand</span><span class="stars"><span class="sf">★★★</span><span class="se">★★</span></span></div>
+          <div class="reveal-cta">Explore path <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BACKDROP -->
+<div id="backdrop" onclick="closePanel()"></div>
+
+<!-- EXPANDING OVERLAY -->
+<div id="expandOverlay">
+  <div class="ov-media" id="ovMedia"></div>
+  <div class="ov-grad"></div>
+  <div class="ov-content" id="ovContent">
+    <div class="ov-header">
+      <div>
+        <div class="ov-tag"  id="ovTag"></div>
+        <div class="ov-title" id="ovTitle"></div>
+        <div class="ov-subtitle" id="ovSubtitle"></div>
+      </div>
+      <div class="ov-close" onclick="closePanel()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </div>
+    </div>
+    <div class="ov-body" id="ovBody"></div>
   </div>
 </div>
-
-<!-- LEARN -->
-<div id="page-learn" class="page">
-  <div class="wrap">
-    <div class="learn-header">
-      <div class="hero-kicker"><span></span>02 &mdash; Learning tracks</div>
-      <h1>FIVE TRACKS.<br>ONE COMMUNITY.</h1>
-      <p>Every track is built for real-world output. Tap a track to expand it.</p>
-    </div>
-  </div>
-
-  <!-- TRACK 01: Motion Design - PC -->
-  <div class="track-row" onclick="toggle(this)">
-    <div class="track-num">01</div>
-    <div class="track-main">
-      <div class="track-name-row">
-        <div class="track-title">Motion Design &ndash; PC</div>
-        <div class="track-tags-inline">
-          <span class="tag tag-pc">PC</span>
-        </div>
-      </div>
-      <div class="track-desc-row">Professional motion graphics from concept to export. After Effects, built for production.</div>
-      <div class="track-expand">
-        <div class="track-expand-item">After Effects interface and project setup</div>
-        <div class="track-expand-item">Keyframing, easing, and timing control</div>
-        <div class="track-expand-item">Shape layers and vector animation</div>
-        <div class="track-expand-item">Text animation and kinetic type</div>
-        <div class="track-expand-item">Looping and seamless transitions</div>
-        <div class="track-expand-item">Exporting for social, web, and client delivery</div>
-      </div>
-    </div>
-    <div class="track-toggle">+</div>
-  </div>
-
-  <!-- TRACK 02: Video Editing -->
-  <div class="track-row" onclick="toggle(this)">
-    <div class="track-num">02</div>
-    <div class="track-main">
-      <div class="track-name-row">
-        <div class="track-title">Video Editing</div>
-        <div class="track-tags-inline">
-          <span class="tag tag-mob">Mobile</span>
-          <span class="tag tag-pc">PC</span>
-        </div>
-      </div>
-      <div class="track-desc-row">Edit faster, tell better stories, and develop a signature style.</div>
-      <div class="track-expand">
-        <div class="track-expand-item">Editing workflow and timeline organisation</div>
-        <div class="track-expand-item">Premiere Pro and DaVinci Resolve (PC)</div>
-        <div class="track-expand-item">CapCut advanced editing (Mobile)</div>
-        <div class="track-expand-item">Colour grading basics</div>
-        <div class="track-expand-item">Audio mixing and sync</div>
-        <div class="track-expand-item">Short-form vs long-form pacing</div>
-      </div>
-    </div>
-    <div class="track-toggle">+</div>
-  </div>
-
-  <!-- TRACK 03: Motion Design - Phone -->
-  <div class="track-row" onclick="toggle(this)">
-    <div class="track-num">03</div>
-    <div class="track-main">
-      <div class="track-name-row">
-        <div class="track-title">Motion Design &ndash; Phone</div>
-        <div class="track-tags-inline">
-          <span class="tag tag-mob">Mobile</span>
-        </div>
-      </div>
-      <div class="track-desc-row">Full motion output from your phone. No desktop required.</div>
-      <div class="track-expand">
-        <div class="track-expand-item">CapCut animation tools and keyframe control</div>
-        <div class="track-expand-item">Mobile-first motion workflow</div>
-        <div class="track-expand-item">Text and overlay animation for social</div>
-        <div class="track-expand-item">Transitions that hold up on any screen</div>
-        <div class="track-expand-item">Speed and efficiency on a small device</div>
-        <div class="track-expand-item">Exporting optimised for Instagram, TikTok, YouTube</div>
-      </div>
-    </div>
-    <div class="track-toggle">+</div>
-  </div>
-
-  <!-- TRACK 04: AI Content Creation -->
-  <div class="track-row" onclick="toggle(this)">
-    <div class="track-num">04</div>
-    <div class="track-main">
-      <div class="track-name-row">
-        <div class="track-title">AI Content Creation</div>
-        <div class="track-tags-inline">
-          <span class="tag tag-ai">AI</span>
-          <span class="tag tag-mob">Mobile</span>
-          <span class="tag tag-pc">PC</span>
-        </div>
-      </div>
-      <div class="track-desc-row">Use AI as a creative tool, not a crutch. Stay ahead of the shift.</div>
-      <div class="track-expand">
-        <div class="track-expand-item">Prompt engineering for visual output</div>
-        <div class="track-expand-item">AI video generation tools</div>
-        <div class="track-expand-item">Integrating AI into your editing process</div>
-        <div class="track-expand-item">AI image and asset creation</div>
-        <div class="track-expand-item">Staying current as the tools evolve</div>
-        <div class="track-expand-item">Ethical use and creative ownership</div>
-      </div>
-    </div>
-    <div class="track-toggle">+</div>
-  </div>
-
-  <!-- TRACK 05: VFX - PC -->
-  <div class="track-row" onclick="toggle(this)">
-    <div class="track-num">05</div>
-    <div class="track-main">
-      <div class="track-name-row">
-        <div class="track-title">VFX &ndash; PC</div>
-        <div class="track-tags-inline">
-          <span class="tag tag-pc">PC</span>
-          <span class="tag tag-vfx">VFX</span>
-        </div>
-      </div>
-      <div class="track-desc-row">Compositing, tracking, and visual effects for commercial and creative work.</div>
-      <div class="track-expand">
-        <div class="track-expand-item">After Effects compositing fundamentals</div>
-        <div class="track-expand-item">Motion tracking and camera lock</div>
-        <div class="track-expand-item">Green screen and chroma key techniques</div>
-        <div class="track-expand-item">Particle systems and simulations</div>
-        <div class="track-expand-item">Light wraps, glows, and realism passes</div>
-        <div class="track-expand-item">Finishing and rendering for delivery</div>
-      </div>
-    </div>
-    <div class="track-toggle">+</div>
-  </div>
-</div>
-
-<!-- EVENTS -->
-<div id="page-events" class="page">
-  <div class="wrap">
-    <div class="events-header">
-      <div class="hero-kicker"><span></span>03 &mdash; Events</div>
-      <h1>LIVE SESSIONS.<br>REAL FEEDBACK.</h1>
-      <p>Portfolio reviews, project breakdowns, and guest sessions. All free. All live.</p>
-    </div>
-  </div>
-
-  <div class="wrap">
-    <div class="events-section-label">
-      <div class="events-section-label-inner">
-        <div class="events-section-title">Relaunch week &mdash; May 2025</div>
-        <div class="hero-tag" style="font-size:10px;padding:4px 10px;">2 confirmed</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="event-row">
-    <div class="event-date">
-      <div class="event-day-n">26</div>
-      <div class="event-month-l">May</div>
-    </div>
-    <div class="event-body">
-      <div class="event-title">Community kickoff call</div>
-      <div class="event-info">
-        <span class="event-pill pill-live">Live session</span>
-        <span class="event-pill pill-live">Confirmed</span>
-      </div>
-      <div class="event-note">The official restart. We cover what the community is, how it works, and what is coming. This is where it all begins again.</div>
-    </div>
-    <div class="event-aud">
-      <div class="aud-label">Audience</div>
-      <div class="aud-val">All members</div>
-    </div>
-  </div>
-
-  <div class="event-row">
-    <div class="event-date">
-      <div class="event-day-n">28</div>
-      <div class="event-month-l">May</div>
-    </div>
-    <div class="event-body">
-      <div class="event-title">Learning roadmap walkthrough</div>
-      <div class="event-info">
-        <span class="event-pill pill-live">Live session</span>
-        <span class="event-pill pill-live">Confirmed</span>
-      </div>
-      <div class="event-note">Full breakdown of all five learning tracks. What to learn, in what order, and how to get results on mobile and PC.</div>
-    </div>
-    <div class="event-aud">
-      <div class="aud-label">Audience</div>
-      <div class="aud-val">Beginners &amp; Intermediate</div>
-    </div>
-  </div>
-
-  <div class="wrap" style="margin-top:0">
-    <div class="events-section-label" style="margin-top:0">
-      <div class="events-section-label-inner">
-        <div class="events-section-title">Coming up &mdash; dates TBC</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="event-row tbd">
-    <div class="event-date">
-      <div class="event-day-n" style="font-size:22px;color:var(--muted)">TBC</div>
-    </div>
-    <div class="event-body">
-      <div class="event-title">Client acquisition session</div>
-      <div class="event-info">
-        <span class="event-pill pill-tbc">Date TBC</span>
-      </div>
-      <div class="event-note">How to land clients, price your work, and build a personal brand that brings work to you.</div>
-    </div>
-    <div class="event-aud">
-      <div class="aud-label">Audience</div>
-      <div class="aud-val">Pros</div>
-    </div>
-  </div>
-
-  <div class="event-row tbd">
-    <div class="event-date">
-      <div class="event-day-n" style="font-size:22px;color:var(--muted)">TBC</div>
-    </div>
-    <div class="event-body">
-      <div class="event-title">Workflow &amp; speed editing</div>
-      <div class="event-info">
-        <span class="event-pill pill-tbc">Date TBC</span>
-      </div>
-      <div class="event-note">Systems, shortcuts, and habits that separate slow from efficient. For creatives who already know the craft.</div>
-    </div>
-    <div class="event-aud">
-      <div class="aud-label">Audience</div>
-      <div class="aud-val">Intermediate &amp; Advanced</div>
-    </div>
-  </div>
-
-  <div class="wrap">
-    <div class="events-section-label">
-      <div class="events-section-label-inner">
-        <div class="events-section-title">Recurring &mdash; every month</div>
-      </div>
-    </div>
-    <div class="recurring-rows">
-      <div class="rec-row">
-        <div class="rec-name">Portfolio review</div>
-        <div class="rec-desc">Hop on live, share your portfolio, get real feedback. No fluff.</div>
-        <div class="rec-freq">1&ndash;2&times; / month</div>
-      </div>
-      <div class="rec-row">
-        <div class="rec-name">Project file breakdown</div>
-        <div class="rec-desc">Open a real project file and walk through how it was built from scratch.</div>
-        <div class="rec-freq">1&ndash;2&times; / month</div>
-      </div>
-      <div class="rec-row">
-        <div class="rec-name">Guest contributor sessions</div>
-        <div class="rec-desc">Community contributors share their workflows. Different tools, same standard.</div>
-        <div class="rec-freq">Ongoing</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<footer>
-  <div class="footer-logo">The Incubation Hub &mdash; 2025</div>
-  <div class="footer-tag"><div class="footer-dot"></div> 1,971 members</div>
-</footer>
 
 <script>
-function go(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  document.getElementById('nav-'+id).classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function toggle(row){
-  row.classList.toggle('open');
-}
+  const paths = {
+    'motion-laptop': {
+      tag: 'Laptop Required',
+      title: 'Motion Design',
+      subtitle: 'After Effects · Premiere Pro · Cinema 4D · Blender',
+      mediaBg: `radial-gradient(ellipse 80% 60% at 30% 20%, #0d3a20 0%, transparent 60%), radial-gradient(ellipse 60% 80% at 80% 80%, #071c10 0%, transparent 55%), linear-gradient(160deg, #061208 0%, #030905 100%)`,
+      html: `
+        <!-- WHAT IS MOTION DESIGN -->
+        <div class="info-hero">
+          <div class="info-hero-text">
+            <div class="info-section-label"><i class="fa-solid fa-slash"></i> What is it?</div>
+            <p>Motion Design is the art of bringing graphics, typography, and visual elements to life through animation. It's where graphic design meets animation — and one of the <strong>highest-paying creative skills</strong> in the digital space.</p>
+          </div>
+          <div class="info-hero-software">
+            <div class="sw-badge">Ae</div>
+            <div class="sw-badge">Pr</div>
+            <div class="sw-badge">Ai</div>
+            <div class="sw-badge dim">Ps</div>
+            <div class="sw-badge dim">C4D</div>
+            <div class="sw-badge dim">Bld</div>
+          </div>
+        </div>
+
+        <!-- PATH AT A GLANCE -->
+        <div class="info-section-label"><i class="fa-solid fa-slash"></i> Path at a Glance</div>
+        <div class="glance-row">
+          <div class="gl-card">
+            <i class="fa-solid fa-laptop gl-icon"></i>
+            <div class="gl-lbl">Device</div>
+            <div class="gl-val">Laptop<br>Required</div>
+          </div>
+          <div class="gl-card">
+            <i class="fa-solid fa-display gl-icon"></i>
+            <div class="gl-lbl">Software</div>
+            <div class="gl-val" style="font-size:10px;line-height:1.6">After Effects<br>Premiere Pro<br>Cinema 4D<br>Blender</div>
+          </div>
+          <div class="gl-card">
+            <i class="fa-solid fa-memory gl-icon"></i>
+            <div class="gl-lbl">Hardware</div>
+            <div class="gl-val">Minimum<br>8 GB RAM<br><span style="color:rgba(255,255,255,0.35);font-size:10px">Optimal 16–32 GB</span></div>
+          </div>
+          <div class="gl-card">
+            <i class="fa-solid fa-gear gl-icon"></i>
+            <div class="gl-lbl">Technical Skill</div>
+            <div class="gl-val red-val">★★★★★</div>
+          </div>
+          <div class="gl-card">
+            <i class="fa-solid fa-paintbrush gl-icon"></i>
+            <div class="gl-lbl">Creative Skill</div>
+            <div class="gl-val red-val">★★★★<span style="color:rgba(255,255,255,0.15)">★</span></div>
+          </div>
+          <div class="gl-card">
+            <i class="fa-solid fa-dollar-sign gl-icon"></i>
+            <div class="gl-lbl">Income Potential</div>
+            <div class="gl-val red-val" style="font-size:13px">$100–$5,000<br><span style="font-size:10px;color:rgba(255,255,255,0.4);font-weight:500">per project</span></div>
+          </div>
+          <div class="gl-card">
+            <i class="fa-regular fa-clock gl-icon"></i>
+            <div class="gl-lbl">Time to First Job</div>
+            <div class="gl-val red-val" style="font-size:18px">3–4<br><span style="font-size:11px">Months</span></div>
+          </div>
+        </div>
+
+        <!-- LEARNING TIMELINE -->
+        <div class="info-section-label"><i class="fa-solid fa-slash"></i> Learning Timeline</div>
+        <div class="tl-infographic">
+          <div class="tl-inf-item">
+            <img class="tl-inf-img" src="https://agadon.b-cdn.net/Edits_Beginier.png" alt="Beginner">
+            <div class="tl-inf-vignette"></div>
+            <div class="tl-inf-base">
+              <div class="tl-inf-label">Beginner</div>
+              <div class="tl-inf-dur">3 – 5 Months</div>
+              <div class="tl-inf-reveal">
+                <div class="tl-inf-desc">After Effects fundamentals: keyframes, easing, shape layers, text animation, compositing. Start getting clients after 3–4 months.</div>
+              </div>
+            </div>
+          </div>
+          <div class="tl-inf-item">
+            <img class="tl-inf-img" src="https://agadon.b-cdn.net/Edits_Intermediate.png" alt="Intermediate">
+            <div class="tl-inf-vignette"></div>
+            <div class="tl-inf-base">
+              <div class="tl-inf-label">Intermediate</div>
+              <div class="tl-inf-dur">12 – 18 Months</div>
+              <div class="tl-inf-reveal">
+                <div class="tl-inf-desc">Full motion pieces, expressions, advanced timing, sound design integration, client-ready deliverables.</div>
+              </div>
+            </div>
+          </div>
+          <div class="tl-inf-item">
+            <img class="tl-inf-img" src="https://agadon.b-cdn.net/Edits_Expert.png" alt="Expert">
+            <div class="tl-inf-vignette"></div>
+            <div class="tl-inf-base">
+              <div class="tl-inf-label">Expert</div>
+              <div class="tl-inf-dur">3 – 6 Years</div>
+              <div class="tl-inf-reveal">
+                <div class="tl-inf-desc">High-end commercial work, 3D integration, character animation, directing motion for brands and agencies.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- WHO HIRES -->
+        <div class="info-section-label"><i class="fa-solid fa-slash"></i> Who Hires Motion Designers?</div>
+        <div class="who-hires">
+          <div class="wh-row">
+            <div class="wh-icon"><i class="fa-solid fa-rocket"></i></div>
+            <div class="wh-info">
+              <div class="wh-name">SaaS companies, startups & apps</div>
+              <div class="wh-desc">Product explainers, onboarding videos, feature launches</div>
+            </div>
+            <div class="wh-rate">$300 – $5,000+<br><span>per project</span></div>
+            <div class="wh-len">Typical length:<br>30 sec – 3 min</div>
+          </div>
+          <div class="wh-row">
+            <div class="wh-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div class="wh-info">
+              <div class="wh-name">Course creators & community builders</div>
+              <div class="wh-desc">Course trailers, module openers, lesson transitions, launch videos</div>
+            </div>
+            <div class="wh-rate">$150 – $3,000<br><span>per project</span></div>
+            <div class="wh-len">Typical length:<br>15 sec – 2 min</div>
+          </div>
+          <div class="wh-row">
+            <div class="wh-icon"><i class="fa-brands fa-youtube"></i></div>
+            <div class="wh-info">
+              <div class="wh-name">YouTubers</div>
+              <div class="wh-desc">Lower-thirds, intro/outro, transitions, motion graphics packs</div>
+            </div>
+            <div class="wh-rate">$50 – $800<br><span>per project</span></div>
+            <div class="wh-len">Typical length:<br>3–20 sec per element</div>
+          </div>
+          <div class="wh-row">
+            <div class="wh-icon"><i class="fa-solid fa-film"></i></div>
+            <div class="wh-info">
+              <div class="wh-name">Documentary / essay YouTubers</div>
+              <div class="wh-desc">Full episode animation, maps/diagrams, stylized sequences</div>
+            </div>
+            <div class="wh-rate">$1,000 – $15,000+<br><span>per video</span></div>
+            <div class="wh-len">Typical length:<br>8–45 min</div>
+          </div>
+          <div class="wh-row">
+            <div class="wh-icon"><i class="fa-solid fa-bullhorn"></i></div>
+            <div class="wh-info">
+              <div class="wh-name">Marketing / content agencies</div>
+              <div class="wh-desc">Retainers for multiple client deliverables</div>
+            </div>
+            <div class="wh-rate">$500 – $8,000+<br><span>per month</span></div>
+            <div class="wh-len">Typical length:<br>10–40 short assets/month</div>
+          </div>
+          <div class="wh-row">
+            <div class="wh-icon"><i class="fa-solid fa-microphone"></i></div>
+            <div class="wh-info">
+              <div class="wh-name">Event & conference teams</div>
+              <div class="wh-desc">Title sequences, speaker stings, LED screen loops</div>
+            </div>
+            <div class="wh-rate">$200 – $4,000<br><span>per event package</span></div>
+            <div class="wh-len">Typical length:<br>5–30 sec stings</div>
+          </div>
+          <div class="wh-row">
+            <div class="wh-icon"><i class="fa-solid fa-music"></i></div>
+            <div class="wh-info">
+              <div class="wh-name">Music artists & labels</div>
+              <div class="wh-desc">Visualisers, lyric videos, animated cover art</div>
+            </div>
+            <div class="wh-rate">$100 – $2,500<br><span>per piece</span></div>
+            <div class="wh-len">Typical length:<br>15 sec – 4 min</div>
+          </div>
+        </div>
+      `
+    },
+    'video-editing': {
+      tag: 'All Devices',
+      title: 'Video Editing',
+      subtitle: 'Premiere Pro · CapCut · DaVinci Resolve · After Effects',
+      mediaBg: `radial-gradient(ellipse 75% 55% at 25% 25%, #0c1e40 0%, transparent 60%), radial-gradient(ellipse 55% 75% at 75% 85%, #060e1f 0%, transparent 55%), linear-gradient(160deg, #060c1e 0%, #020408 100%)`,
+      html: `<div class="coming-soon"><div class="cs-icon">🚧</div><h3>Full breakdown coming soon</h3><p>Highest consumer demand of all five paths. The complete Video Editing roadmap is being built — worth the wait.</p></div>`
+    },
+    'motion-phone': {
+      tag: 'Phone Only',
+      title: 'Motion Design — Phone',
+      subtitle: 'Alight Motion',
+      mediaBg: `radial-gradient(ellipse 80% 55% at 35% 20%, #1a0d3a 0%, transparent 60%), radial-gradient(ellipse 55% 70% at 70% 85%, #0c071c 0%, transparent 55%), linear-gradient(160deg, #0d0618 0%, #040208 100%)`,
+      html: `<div class="coming-soon"><div class="cs-icon">🚧</div><h3>Full breakdown coming soon</h3><p>No laptop? No problem. The full Mobile Motion Design path is coming shortly.</p></div>`
+    },
+    'ai-content': {
+      tag: 'All Devices',
+      title: 'AI Content Creation',
+      subtitle: 'Higgsfield · CapCut · Eleven Labs · RunwayML',
+      mediaBg: `radial-gradient(ellipse 70% 60% at 30% 25%, #2a1400 0%, transparent 58%), radial-gradient(ellipse 60% 70% at 75% 80%, #150a00 0%, transparent 55%), linear-gradient(160deg, #120900 0%, #060300 100%)`,
+      html: `<div class="coming-soon"><div class="cs-icon">🚧</div><h3>Full breakdown coming soon</h3><p>Fastest path to your first paid job — lowest barrier, real income potential. Roadmap coming soon.</p></div>`
+    },
+    'vfx-pc': {
+      tag: 'Laptop Required',
+      title: 'VFX',
+      subtitle: 'After Effects · Blender · Nuke · DaVinci Resolve (Fusion)',
+      mediaBg: `radial-gradient(ellipse 75% 55% at 30% 20%, #2a0018 0%, transparent 58%), radial-gradient(ellipse 55% 70% at 75% 80%, #14000c 0%, transparent 55%), linear-gradient(160deg, #120008 0%, #060003 100%)`,
+      html: `<div class="coming-soon"><div class="cs-icon">🚧</div><h3>Full breakdown coming soon</h3><p>Highest income ceiling of any path here. The VFX roadmap is being built — worth the wait.</p></div>`
+    }
+  };
+
+  let active = null;
+  let activeCard = null; // store the card element, not a frozen rect
+
+  function getPanelSize() {
+    const pw = Math.min(window.innerWidth * 0.96, 1200);
+    const ph = Math.min(window.innerHeight * 0.96, 980);
+    return { pw, ph };
+  }
+
+  function openPath(id, card) {
+    if (active === id) { closePanel(); return; }
+    active = id;
+    activeCard = card;
+    const data = paths[id];
+    const grid = document.getElementById('pathsGrid');
+    const ov   = document.getElementById('expandOverlay');
+    const ovC  = document.getElementById('ovContent');
+
+    grid.querySelectorAll('.path-card').forEach(c => c.classList.remove('is-source'));
+    grid.classList.add('has-active');
+    card.classList.add('is-source');
+
+    // Start overlay from card position
+    const r = card.getBoundingClientRect();
+    setOverlayRect(ov, r.top, r.left, r.width, r.height, '4px');
+
+    document.getElementById('ovMedia').style.background = data.mediaBg;
+    document.getElementById('ovTag').textContent      = data.tag;
+    document.getElementById('ovTitle').textContent    = data.title;
+    document.getElementById('ovSubtitle').textContent = data.subtitle;
+    document.getElementById('ovBody').innerHTML       = data.html;
+    ovC.classList.remove('visible');
+    ov.style.display = 'block';
+    document.getElementById('backdrop').classList.add('active');
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        ov.classList.remove('closing');
+        ov.classList.add('animating');
+        positionPanel(ov); // expand to centred panel
+        setTimeout(() => { ovC.classList.add('visible'); }, 430);
+      });
+    });
+  }
+
+  function positionPanel(ov) {
+    const { pw, ph } = getPanelSize();
+    setOverlayRect(ov,
+      (window.innerHeight - ph) / 2,
+      (window.innerWidth  - pw) / 2,
+      pw, ph, '10px'
+    );
+  }
+
+  function closePanel() {
+    if (!active) return;
+    const ov   = document.getElementById('expandOverlay');
+    const ovC  = document.getElementById('ovContent');
+    const grid = document.getElementById('pathsGrid');
+    ovC.classList.remove('visible');
+    document.getElementById('backdrop').classList.remove('active');
+    ov.classList.remove('animating');
+    ov.classList.add('closing');
+
+    // Re-read card position NOW (after possible resize)
+    if (activeCard) {
+      const r = activeCard.getBoundingClientRect();
+      setOverlayRect(ov, r.top, r.left, r.width, r.height, '4px');
+    }
+
+    setTimeout(() => {
+      ov.style.display = 'none';
+      ov.classList.remove('closing');
+      grid.classList.remove('has-active');
+      grid.querySelectorAll('.path-card').forEach(c => c.classList.remove('is-source'));
+      active = null; activeCard = null;
+    }, 520);
+  }
+
+  // Keep panel centred on resize
+  window.addEventListener('resize', () => {
+    if (!active) return;
+    const ov = document.getElementById('expandOverlay');
+    ov.classList.remove('animating'); // instant reposition, no transition
+    positionPanel(ov);
+    // re-enable transition after reposition
+    requestAnimationFrame(() => { ov.classList.add('animating'); });
+  });
+
+  function setOverlayRect(el, top, left, width, height, radius) {
+    el.style.top = top + 'px'; el.style.left = left + 'px';
+    el.style.width = width + 'px'; el.style.height = height + 'px';
+    el.style.borderRadius = radius;
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
+
+  // ── VIDEO SWITCHING ──
+  const allVideos = document.querySelectorAll('.bg-video');
+  const defaultVideo = document.getElementById('bgDefault');
+  let hoverTimeout = null;
+
+  // Activate default on load
+  defaultVideo.play();
+  defaultVideo.classList.add('active');
+
+  function hoverVideo(id) {
+    clearTimeout(hoverTimeout);
+    const target = document.getElementById(id);
+    if (!target) return;
+    allVideos.forEach(v => v.classList.remove('active'));
+    if (target.paused) target.play();
+    target.classList.add('active');
+  }
+
+  function resetVideo() {
+    hoverTimeout = setTimeout(() => {
+      allVideos.forEach(v => v.classList.remove('active'));
+      defaultVideo.classList.add('active');
+    }, 120);
+  }
+
+  // ── SPRINGBOARD GRID ──
+  function initSpringboard() {
+    const viewport = document.querySelector('.sb-viewport');
+    const grid = document.getElementById('sbGrid');
+    if (!viewport || !grid) return;
+
+    let isDragging = false, startX = 0, scrollX = 0, velX = 0, lastX = 0, raf = null;
+    let activeIdx = null;
+
+    const items = grid.querySelectorAll('.sb-item');
+
+    // Activate first 16:9 item by default
+    activateItem(items[0]);
+
+    function activateItem(item) {
+      if (!item) return;
+      items.forEach(i => {
+        i.classList.remove('active-item');
+        // pause all iframes/videos
+        const iframe = i.querySelector('iframe');
+        const vid = i.querySelector('video');
+        if (iframe) { const src = iframe.src; iframe.src = src.replace('autoplay=1','autoplay=0'); }
+        if (vid) vid.pause();
+        i.querySelector('.sb-overlay').style.background = 'rgba(0,0,0,0.45)';
+      });
+      item.classList.add('active-item');
+      // play active
+      const iframe = item.querySelector('iframe');
+      const vid = item.querySelector('video');
+      if (iframe && !item.dataset.ig) {
+        iframe.src = iframe.src.replace('autoplay=0','autoplay=1');
+      }
+      if (vid) { vid.currentTime = 0; vid.play(); }
+    }
+
+    items.forEach((item, i) => {
+      item.addEventListener('click', () => {
+        if (isDragging) return;
+        activateItem(item);
+        // scroll item toward centre
+        const vw = viewport.offsetWidth;
+        const itemRect = item.getBoundingClientRect();
+        const gridRect = grid.getBoundingClientRect();
+        const itemCentre = item.offsetLeft + item.offsetWidth / 2;
+        scrollX = -(itemCentre - vw / 2);
+        scrollX = Math.min(0, Math.max(scrollX, -(grid.scrollWidth - vw)));
+        grid.style.transition = 'left 0.5s cubic-bezier(0.16,1,0.3,1)';
+        grid.style.left = scrollX + 'px';
+        setTimeout(() => { grid.style.transition = 'none'; }, 520);
+      });
+    });
+
+    // Drag
+    viewport.addEventListener('mousedown', e => {
+      isDragging = false;
+      startX = e.clientX - scrollX;
+      lastX = e.clientX;
+      velX = 0;
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
+    });
+
+    function onMove(e) {
+      const dx = Math.abs(e.clientX - (startX + scrollX));
+      if (dx > 4) isDragging = true;
+      velX = e.clientX - lastX;
+      lastX = e.clientX;
+      const newX = e.clientX - startX;
+      const max = -(grid.scrollWidth - viewport.offsetWidth + 80);
+      scrollX = Math.min(40, Math.max(newX, max));
+      grid.style.left = scrollX + 'px';
+    }
+
+    function onUp() {
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+      // momentum
+      let v = velX;
+      function momentum() {
+        v *= 0.92;
+        if (Math.abs(v) < 0.5) return;
+        const max = -(grid.scrollWidth - viewport.offsetWidth + 80);
+        scrollX = Math.min(40, Math.max(scrollX + v, max));
+        grid.style.left = scrollX + 'px';
+        raf = requestAnimationFrame(momentum);
+      }
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(momentum);
+      setTimeout(() => { isDragging = false; }, 50);
+    }
+
+    // Touch
+    viewport.addEventListener('touchstart', e => {
+      startX = e.touches[0].clientX - scrollX;
+      lastX = e.touches[0].clientX; velX = 0;
+    }, {passive:true});
+    viewport.addEventListener('touchmove', e => {
+      velX = e.touches[0].clientX - lastX;
+      lastX = e.touches[0].clientX;
+      const max = -(grid.scrollWidth - viewport.offsetWidth + 80);
+      scrollX = Math.min(40, Math.max(e.touches[0].clientX - startX, max));
+      grid.style.left = scrollX + 'px';
+    }, {passive:true});
+    viewport.addEventListener('touchend', () => {
+      let v = velX;
+      function momentum() {
+        v *= 0.92;
+        if (Math.abs(v) < 0.5) return;
+        const max = -(grid.scrollWidth - viewport.offsetWidth + 80);
+        scrollX = Math.min(40, Math.max(scrollX + v, max));
+        grid.style.left = scrollX + 'px';
+        requestAnimationFrame(momentum);
+      }
+      requestAnimationFrame(momentum);
+    });
+
+    grid.style.left = '0px';
+  }
+
+  // Init springboard whenever panel opens
+  const _origOpen = openPath;
+  function openPathWithSB(id, card) {
+    _origOpen(id, card);
+    if (id === 'motion-laptop') {
+      setTimeout(initSpringboard, 500);
+    }
+  }
+  document.querySelectorAll('.card-freeze').forEach(v => {
+    v.addEventListener('loadeddata', () => {
+      v.currentTime = 0.5;
+      v.play().then(() => {
+        setTimeout(() => { v.pause(); }, 80);
+      }).catch(() => {});
+    }, { once: true });
+  });
 </script>
 </body>
 </html>
